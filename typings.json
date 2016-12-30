@@ -1,0 +1,10 @@
+{
+  "globalDependencies": {
+    "linq": "registry:dt/linq#2.2.0+20160619013616",    
+    "react-dropzone": "registry:dt/react-dropzone#0.0.0+20161130135520",
+    "whatwg-fetch": "registry:dt/whatwg-fetch#0.0.0+20161120230953"
+  },
+  "dependencies": {
+    "linq": "registry:npm/linq#3.0.5+20160322032703",    
+  }
+}

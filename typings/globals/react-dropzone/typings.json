@@ -1,0 +1,8 @@
+{
+  "resolution": "main",
+  "tree": {
+    "src": "https://raw.githubusercontent.com/DefinitelyTyped/DefinitelyTyped/31d80d265fbe5894f3a06c145d394a5240fa7043/react-dropzone/index.d.ts",
+    "raw": "registry:dt/react-dropzone#0.0.0+20161130135520",
+    "typings": "https://raw.githubusercontent.com/DefinitelyTyped/DefinitelyTyped/31d80d265fbe5894f3a06c145d394a5240fa7043/react-dropzone/index.d.ts"
+  }
+}
