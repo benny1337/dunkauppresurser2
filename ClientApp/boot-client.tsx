@@ -11,8 +11,16 @@ import configureStore from './configureStore';
 import { ApplicationState } from './store';
 
 // Get the application-wide store instance, prepopulating with state from the server where available.
+
 const initialState = (window as any).initialReduxState as ApplicationState;
+// const initialState = localStorage.getItem("state") ? JSON.parse(localStorage.getItem("state")) : null;
 const store = configureStore(initialState);
+
+store.subscribe(() => {
+    var state = store.getState().files;    
+    if(state.connections.length > 0)
+        localStorage.setItem("state", JSON.stringify(state));
+});
 const history = syncHistoryWithStore(browserHistory, store);
 declare var $: any;
 
@@ -20,7 +28,7 @@ declare var $: any;
 // This code starts up the React app when it runs in a browser. It sets up the routing configuration
 // and injects the app into a DOM element.
 
-signalRStart(store, () => {
+signalRStart(store, () => {    
     ReactDOM.render(
         <Provider store={store}>
             <Router history={history} children={routes} />

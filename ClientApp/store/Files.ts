@@ -21,8 +21,10 @@ const CONNECTION_WAS_ADDED = 'CONNECTION_WAS_ADDED';
 const CONNECTION_WAS_REMOVED = 'CONNECTION_WAS_REMOVED';
 const CONNECTION_WAS_UPDATED = 'CONNECTION_WAS_UPDATED';
 const CONNECTION_WAS_SELECTED = 'CONNECTION_WAS_SELECTED';
+const TRY_LOAD_STATE_FROM_LOCALSTORAGE = 'TRY_LOAD_STATE_FROM_LOCALSTORAGE';
 
 export const ActionCreators = {
+    tryLoadInitialState: (state: IFilesState) => { return { type: TRY_LOAD_STATE_FROM_LOCALSTORAGE, payload: state } as IAction },
     connectionWasAdded: (c: Connection) => { return { type: CONNECTION_WAS_ADDED, payload: c } as IAction },
     connectionWasRemoved: (c: Connection) => { return { type: CONNECTION_WAS_REMOVED, payload: c } as IAction },
     connectionWasUpdated: (c: Connection) => { return { type: CONNECTION_WAS_UPDATED, payload: c } as IAction },
@@ -51,8 +53,11 @@ export const reducer: Reducer<IFilesState> = (state = {
     selectedConnection: null,
     percentage: 10,
     isLoading: false,
-} as IFilesState, action: IAction) => {
+} as IFilesState, action: IAction) => {    
     switch (action.type) {
+        case TRY_LOAD_STATE_FROM_LOCALSTORAGE:        
+            if (!action.payload) return state;
+            return action.payload;
         case CONNECTION_WAS_ADDED:
             var newconnectionid = 1;
             if (state.connections.length > 0) {
@@ -60,7 +65,8 @@ export const reducer: Reducer<IFilesState> = (state = {
             }
             action.payload.id = newconnectionid;
             return Object.assign({}, state, {
-                connections: [action.payload, ...state.connections]
+                connections: [action.payload, ...state.connections],
+                selectedConnection: action.payload
             });
         case CONNECTION_WAS_REMOVED:
             return Object.assign({}, state, {

@@ -17,6 +17,10 @@ class Dunka extends React.Component<Props, void> {
         super(props);
     }
 
+    componentDidMount(){        
+        this.props.tryLoadInitialState(JSON.parse(localStorage.getItem("state")));
+    }
+
     render() {
         return (
             <div>
